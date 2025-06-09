@@ -30,9 +30,20 @@ A secure, minimalistic notes application built using the MERN stack, inspired by
    ```bash
    git clone https://github.com/your-username/standard-notes-lite.git
    cd standard-notes-lite
+
+2 .**Create environment variables**
+
+    ```bash
+    
     PORT=5000
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret
+
+
+3 .Install dependencies
+
+
+```
 
 # Backend
 cd backend
@@ -41,5 +52,24 @@ npm install
 # Frontend
 cd ../frontend
 npm install
+Run the app
+npm run dev
+
+
+
+4  .Access the app
+```
+
+
+    Frontend: http://localhost:3000
+
+    Backend API: http://localhost:5000/
+
+📝 Notes
+This project is not deployed. Code is available only on GitHub.
+
+Frontend is bootstrapped using Vite.
+
+All notes are user-specific and securely stored in MongoDB.
 
 
