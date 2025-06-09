@@ -30,3 +30,16 @@ A secure, minimalistic notes application built using the MERN stack, inspired by
    ```bash
    git clone https://github.com/your-username/standard-notes-lite.git
    cd standard-notes-lite
+    PORT=5000
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret
+
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+
+
