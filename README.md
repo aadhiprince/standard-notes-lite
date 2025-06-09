@@ -1,75 +1,46 @@
-# Standard Notes Lite 📝
+# React Notes App
+# Introduction
+A web application with **CRUD** (Create, Retrieve, Update, Delete) functionality built using **MERN** stack (MongoDB, Express, React, Node.js) that allows the user to view, create, update and delete notes in the form of visual cards.
+# Tech stacks used
+ - **[MongoDB](https://www.mongodb.com/)** - For database functionality
+ - **[Express](https://expressjs.com/)** - For handling server side (backend) functions
+ - **[React](https://react.dev/)** - For frontend and client side functions
+ - **[Node.js](https://nodejs.org/en)** - For backend functions
+# Approach
+## Backend
+### General
+ - Express routers are used to handle user and note functions.
+ - [Mongoose](https://mongoosejs.com/) is used to handle MongoDB connection.
 
-A secure, minimalistic notes application built using the MERN stack, inspired by Standard Notes. It provides user authentication and full CRUD functionality for managing personal notes with a clean and responsive UI.
-
-## 🚀 Tech Stack
-
-- **Frontend**: React.js, Redux Toolkit, Tailwind CSS
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB (with Mongoose)
-- **Authentication**: JWT, bcrypt
-- **Others**: Axios, Quill.js (rich text editor)
-
-## ✅ Features
-
-- User registration and login with encrypted password storage
-- JWT-based protected routes for note operations
-- Add, edit, delete, and view personal notes
-- Notes displayed as responsive cards
-- Rich text editing support using Quill
-- Search and filter notes
-- Timestamps for creation and updates
-- Notes tagged and categorized
-- Responsive UI for mobile and desktop
-- Error handling and loading states using Redux
-
-## 📦 Installation & Usage
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/your-username/standard-notes-lite.git
-   cd standard-notes-lite
-
-2 .**Create environment variables**
-
-    ```bash
-    
-    PORT=5000
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
-
-
-3 .Install dependencies
-
-
-```
-
-# Backend
-cd backend
-npm install
-
-# Frontend
-cd ../frontend
-npm install
-Run the app
-npm run dev
-
-
-
-4  .Access the app
-```
-
-
-    Frontend: http://localhost:3000
-
-    Backend API: http://localhost:5000/
-
-📝 Notes
-This project is not deployed. Code is available only on GitHub.
-
-Frontend is bootstrapped using Vite.
-
-All notes are user-specific and securely stored in MongoDB.
-
+### Authentication
+ - HTTP **POST** requests are used for both sign up and log in.
+ - Signing up requires creating a username, entering email and password.
+ - Uses [bcrypt](https://www.npmjs.com/package/bcrypt) to encrypt passwords given by users before storing them in database.
+ - Before sign up, the API checks DB to ensure email does not already exist.
+ - For logging in, DB is checked to make sure user exists. 
+ - Then a [JWT](https://jwt.io/) token is created after signing the payload (the user ID in the database) with a secret key and given an expiration time of 1 day.
+ - After successful login, this token is returned.
+ - For every operation involving notes, this token is sent in the appropriate HTTP request's header.
+ - If token expires, user is requested to login again.
+### Database Models/Schema
+ - Two models - user and note
+ - User model contains username, email, and password (encrypted), also auto-generated user ID.
+ - Note model contains title, body and user ID of the user who created it, also auto-generated note ID.
+### Creating Notes
+ - An HTTP **POST** request is sent with the aforementioned **token** in its header.
+ - Notes are in JSON form containing title and body.
+ - The user for which note is created is identified from token.
+ - Uses `save` method from Mongoose.
+### Retrieving Notes
+ - An HTTP **GET** request is sent with the token in its header.
+ - The user ID is identified from token and the DB is searched for notes having user ID of current user.
+ - Uses `find` method from Mongoose.
+ - The notes are then sent back in JSON form.
+### Updating Notes
+ - An HTTP **PATCH** request is sent to the API whose header contains the token as well as the ID of the required note.
+ - The new title and body is sent in JSON form.
+ - It uses `findByIdAndUpdate` method from Mongoose.
+### Deleting Notes
+ - An HTTP **DELETE** request is sent to the API with the token and required note ID in its header.
+ - It uses `findByIdAndDelete` method from Mongoose.
 
