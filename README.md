@@ -20,7 +20,7 @@ Built with **React**, **React Router**, and a backend API for persistent storage
 ## Demo
 
 A quick walkthrough of the application showcasing all key features:  
-🎥 **[Watch the Demo Video](assets/demo_video.mp4)**
+🎥 **[Watch the Demo Video](https://drive.google.com/file/d/1QQrlaqbttaOVHaxa-wN6QX-wDkyroQ9n/view?usp=sharing)**
 
 ---
 
